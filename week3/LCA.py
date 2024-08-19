@@ -9,26 +9,16 @@ class TreeNode:
         self.val = x
         self.left = None
         self.right = None
-
+        
 class Solution:
-    def ancestor(self, root, p, q):
-        if root is None:
-            return None, None
-
-        left_p_LA, left_q_LA = self.ancestor(root.left, p, q)
-        right_p_LA, right_q_LA = self.ancestor(root.right, p, q)
-
-        p_LA = left_p_LA or right_p_LA or (root if root == p else None)
-        q_LA = left_q_LA or right_q_LA or (root if root == q else None)
-
-        if p_LA is not None and q_LA is not None and p_LA != q_LA:
-            return root, root
-        return p_LA, q_LA
-
     def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
-        p_LA, q_LA = self.ancestor(root, p, q)
-        if p_LA == q_LA:
-            return p_LA
-        return None
+        if root in (None, p, q):
+            return root
 
+        left = self.lowestCommonAncestor(root.left, p, q)
+        right = self.lowestCommonAncestor(root.right, p, q)
+
+        return root if left and right else left or right
+
+        
         
