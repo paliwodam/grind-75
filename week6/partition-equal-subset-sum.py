@@ -7,13 +7,10 @@ class Solution:
         if nums_sum % 2 == 1: return False
         half = nums_sum // 2
 
-        memo = [[False for _ in range(n)] for _ in range(half + 1)]
-        for i in range(n): memo[0][i] = True
-
-        for i in range(1, n):
-            for j in range(1, half+1):
-                memo[j][i] = memo[j][i-1]
-                if j - nums[i] >= 0:
-                    memo[j][i] = memo[j][i] or memo[j-nums[i]][i-1]
+        all_sums = set([0])
         
-        return any(memo[half])
+        for num in nums:
+            for el in list(all_sums):
+                all_sums.add(el + num)
+        
+        return half in all_sums
