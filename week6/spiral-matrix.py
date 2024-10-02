@@ -1,7 +1,6 @@
 # Given an m x n matrix, return all elements of the matrix in spiral order.
 
 from typing import List
-
 class Solution:
     def spiralOrder(self, matrix: List[List[int]]) -> List[int]:
         n, m = len(matrix), len((matrix[0]))
@@ -25,10 +24,10 @@ class Solution:
                 result.append(matrix[idx][k])
 
         while i < j-1 and k < l-1:
-            r = right(i, j, k, l)
-            d = down(i, j, k, l)
-            lf = left(i, j, k, l)
-            u = up(i, j, k, l)
+            right(i, j, k, l)
+            down(i, j, k, l)
+            left(i, j, k, l)
+            up(i, j, k, l)
             k += 1
             i += 1
             l -= 1
