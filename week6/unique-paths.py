@@ -2,7 +2,9 @@
 # Given the two integers m and n, return the number of possible unique paths that the robot can take to reach the bottom-right corner.
 # The test cases are generated so that the answer will be less than or equal to 2 * 109.
 
-from math import factorial
 class Solution:
     def uniquePaths(self, m: int, n: int) -> int:
-        return int(factorial(m+n-2) / (factorial(m-1) * (factorial(n-1))))
+        result = 1
+        for i in range(1, min(m, n)):
+            result = result * (m + n - 1 - i) // i
+        return result
