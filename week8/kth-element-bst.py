@@ -10,19 +10,18 @@ class TreeNode:
 
 class Solution:
     def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
-        kth = None
-        def DFS(node, prev):
-            if node is None:
-                return 0
-            left = DFS(node.left, prev)
-            curr = left + 1 if left != 0 else prev + 1
-            nonlocal kth
-            if curr == k:
-                kth = node.val
-                
-            right = DFS(node.right, curr)
-            return right or curr
-        
-        DFS(root, 0)
-        return kth
+        node, stack = root, []
+        n = 0
 
+        while node or stack:
+            while node:
+                stack.append(node)
+                node = node.left
+
+            node = stack.pop()
+            n += 1 
+
+            if n == k:
+                return node.val
+
+            node = node.right
